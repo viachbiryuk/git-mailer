@@ -24,6 +24,7 @@ class MessageCtrl {
     console.log('ONE:', gatheredDetails);
 
     const mailed = await MailingSeq.sendMailToGithubUserArray(gatheredDetails.sequenceResult, mailingData);
+    console.log('TWI:', mailed);
     if (mailed.allSuccessful === false) {
       return next({
         status: 400,
@@ -32,7 +33,7 @@ class MessageCtrl {
       });
     }
 
-    console.log('TWI:', mailed);
+
 
     res.json({
       message: 'Operation sequence passed successfully',
