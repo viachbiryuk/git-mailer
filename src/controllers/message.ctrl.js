@@ -21,6 +21,8 @@ class MessageCtrl {
       });
     }
 
+    console.log('ONE:', gatheredDetails);
+
     const mailed = await MailingSeq.sendMailToGithubUserArray(gatheredDetails.sequenceResult, mailingData);
     if (mailed.allSuccessful === false) {
       return next({
@@ -29,6 +31,8 @@ class MessageCtrl {
         detailed: new Transform(gatheredDetails.sequenceResult).loopExclude(['store', 'error']).out()
       });
     }
+
+    console.log('TWI:', mailed);
 
     res.json({
       message: 'Operation sequence passed successfully',
