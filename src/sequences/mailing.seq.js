@@ -16,18 +16,19 @@ class MailingSeq {
   static sendMailToGithubUserArray (gathered, mailingData) {
     let promises = [];
     gathered.map((item) => {
+      const userEmail = item.store.user && item.store.user.email || null;
       const promised = MailingSeq.sendMailToGithubUser(
         item.nickname,
         mailingData,
         item.store.weather,
-        item.store.user.email
+        userEmail
       );
       promises.push(promised);
     });
     return Promise.all(promises)
       .then((result) => {
         return {
-          allSuccessful: result.find(item => item.success === false) || true,
+          allSuccessful: !Boolean(result.find(item => item.success === false)),
           sequenceResult: result
         };
       });
@@ -39,6 +40,9 @@ class MailingSeq {
     return MailingSeq.prepareWeatherMessageTemplate(weather, mailingData)
       .then((weatherMailTpl) => {
         failedOperation = 'send-mail';
+        if (!userEmail) {
+          return Promise.reject('No email');
+        }
         return mailSrv.to(userEmail, mailingData.subject, mailingData.message, weatherMailTpl);
       })
       .then((mailed) => {

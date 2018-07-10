@@ -14,7 +14,7 @@ class UserSequence {
     return Promise.all(promises)
       .then((result) => {
         return {
-          allSuccessful: result.find(item => item.success === false) || true,
+          allSuccessful: !Boolean(result.find(item => item.success === false)),
           sequenceResult: result
         };
       });

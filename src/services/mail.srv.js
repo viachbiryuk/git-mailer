@@ -23,11 +23,7 @@ class MailService {
       html: body
     };
 
-    console.log('TO:', to);
-    return this.transporterPromise.sendMail(mailOptions).then((r) => {
-      console.log('return:', r);
-      return r;
-    });
+    return this.transporterPromise.sendMail(mailOptions);
   }
 
 
