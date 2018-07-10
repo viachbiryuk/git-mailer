@@ -28,3 +28,10 @@
 * `/message-to` (application/json):
     - users (array of strings)
     - message (sting)
+    ```$json 
+    EXAMPLE
+    {
+        "users": ["nghialv", "NghiaTranUIT", "iliakan"],
+        "message": "The most arbitrary message"
+    }
+    ```

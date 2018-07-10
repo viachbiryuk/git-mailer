@@ -21,10 +21,7 @@ class MessageCtrl {
       });
     }
 
-    console.log('ONE:', gatheredDetails);
-
     const mailed = await MailingSeq.sendMailToGithubUserArray(gatheredDetails.sequenceResult, mailingData);
-    console.log('TWI:', JSON.stringify(mailed));
     if (mailed.allSuccessful === false) {
       return next({
         status: 400,
@@ -32,8 +29,6 @@ class MessageCtrl {
         detailed: new Transform(gatheredDetails.sequenceResult).loopExclude(['store', 'error']).out()
       });
     }
-
-
 
     res.json({
       message: 'Operation sequence passed successfully',
