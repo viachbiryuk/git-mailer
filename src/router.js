@@ -13,9 +13,9 @@ router.route('/sign-in')
 
 router.route('/sign-up')
   .post(
-    validateReq('sign-up'),
     acceptFile('avatar', 'avatars'),
     imageThumb('avatars', 'Avatar image is not provided'),
+    validateReq('sign-up'),
     ctrl.$auth.signUp
   )
 ;
