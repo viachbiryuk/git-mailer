@@ -1,8 +1,9 @@
 # git-mailer
 
 ## Usage
-1. npm install
-2. npm start
+1. fill missing fields in /conf.js
+2. npm install
+3. npm start
 
 ## Features
 1. SignUp with avatar uploading
